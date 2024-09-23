@@ -1,3 +1,85 @@
+# FastHTML vs. Streamlit
+
+1. Greater flexibility and control:
+FastHTML is built on top of Starlette, a lightweight ASGI framework. This allows developers to have more fine-grained control over the application structure, routing, and HTTP interactions. Streamlit, while easy to use, has a more opinionated and constrained approach that can limit flexibility for complex applications.
+
+2. Better performance for web applications:
+FastHTML is designed as a web framework, leveraging HTMX for efficient partial page updates. This can result in faster, more responsive applications compared to Streamlit's full page reloads for many interactions.
+
+3. More natural web development paradigm:
+FastHTML allows developers to work with HTML-like syntax directly in Python, making it easier for web developers to transfer their existing skills. Streamlit's approach is more widget-based and may feel less natural for complex web layouts.
+
+4. Seamless integration with modern web technologies:
+The example shows easy integration with libraries like Plotly for mapping and HTMX for dynamic updates. This allows developers to leverage a wide range of web technologies and JavaScript libraries more easily than in Streamlit.
+
+5. Better support for complex routing and API design:
+FastHTML inherits Starlette's powerful routing capabilities, making it easier to create complex application structures with multiple pages and API endpoints. Streamlit's routing is more limited and less suited for complex multi-page applications.
+
+6. More control over the frontend:
+While Streamlit abstracts away much of the frontend, FastHTML allows developers to have precise control over HTML, CSS, and JavaScript. This is crucial for creating highly customized and branded user interfaces.
+
+7. Built-in support for authentication and sessions:
+The example demonstrates built-in support for user sessions and authentication, which is more challenging to implement in Streamlit.
+
+8. Better suited for production-ready applications:
+FastHTML's architecture is closer to traditional web applications, making it easier to transition from a PoC to a production-ready application. Streamlit is primarily designed for data science prototyping and may require significant rework for production use.
+
+11. Better support for asynchronous operations:
+FastHTML leverages Python's async capabilities, allowing for more efficient handling of I/O-bound operations, which is particularly useful for complex applications dealing with multiple data sources or APIs.
+
+While Streamlit excels in quickly prototyping data science applications with minimal code, FastHTML provides a more robust, flexible, and web-native approach that is better suited for building complex, personalized, and production-ready web applications. It offers a better balance between ease of use and the power needed for more sophisticated PoCs that may evolve into full-fledged applications.
+
+# FastHTML vs. FastAPI
+
+FastHTML and FastAPI share several similarities in their approach to building web applications, particularly for developers familiar with Python. Here's how FastHTML is like FastAPI for web-based applications:
+
+1. Python-based frameworks:
+Both FastHTML and FastAPI are Python-based frameworks designed to simplify and speed up web application development.
+
+2. Built on Starlette:
+Both frameworks are built on top of Starlette, a lightweight ASGI framework. This provides a solid foundation for high-performance asynchronous code.
+
+3. Type hinting and data validation:
+Both frameworks leverage Python's type hinting system. In FastAPI, this is used for automatic request parsing and validation. FastHTML similarly uses type annotations for form data parsing, as seen in the example:
+
+```python
+@rt("/geo-chat")
+def post(message: str):
+    # ...
+```
+
+4. Decorator-based routing:
+Both frameworks use decorators for routing. In FastAPI, you might see `@app.get("/")`, while in FastHTML it's `@rt("/")`. This makes defining endpoints intuitive and similar to FastAPI:
+
+```python
+@rt("/")
+def get():
+    return (
+        Main(
+            get_navigation("/"),
+            P("Hello world"),
+            cls="container",
+        ),
+    )
+```
+
+7. Support for asynchronous programming:
+Both frameworks support asynchronous programming out of the box, allowing for efficient handling of concurrent requests.
+
+8. Easy integration with Pydantic:
+Both frameworks work well with Pydantic for data modeling and validation. 
+
+9. WebSocket support:
+Both frameworks provide built-in support for WebSockets, allowing real-time bidirectional communication.
+
+10. Middleware support:
+Both FastAPI and FastHTML allow the use of middleware for processing requests and responses. In FastHTML, this is seen with the `Beforeware` class.
+
+11. Static file serving:
+Both frameworks provide easy ways to serve static files, which is crucial for web applications.
+
+The key difference is that while FastAPI is primarily designed for building APIs, FastHTML is more focused on building full-stack web applications with integrated frontend capabilities. FastHTML provides tools for generating HTML directly from Python code, which is not a focus of FastAPI. FastHTML can be seen as an extension of the FastAPI philosophy into the realm of full-stack web development.
+
 # Building a Geo Chat Application with FastHTML
 
 ## Step 1: Setting Up the Project
